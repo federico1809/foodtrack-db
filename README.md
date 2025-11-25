@@ -61,7 +61,7 @@ El objetivo es simular un entorno de desarrollo profesional con un motor robusto
 
 ## Diagrama ER
 
-![Diagrama ER FoodTrack](ER_FoodTrack.png)
+![Diagrama ER de FoodTrack](FoodTrackDB_ER.png)
 
 > Exportá este diagrama desde DBeaver o cualquier herramienta de modelado y guardalo en la raíz del repositorio como `ER_FoodTrack.png`.
 
@@ -74,7 +74,7 @@ El objetivo es simular un entorno de desarrollo profesional con un motor robusto
 3. Cargar los datos iniciales desde los CSV usando:
    - **BULK INSERT** o  
    - **Asistente de importación de SQL Server**
-4. (Opcional) Ejecutar `cargar_datos.py` para cargar datos automáticamente con Python y registrar errores en la tabla `failed_orders`.  
+4. Ejecutar `AUT_failed_orders.py` para cargar datos automáticamente con Python y registrar errores en la tabla `failed_orders`.  
 5. Verificar la carga:
 
 ```sql
