@@ -45,7 +45,7 @@ foodtrack-db/
 ├─ AUT_failed_orders.py
 ├─ FoodTrackDB_ER.png
 └─ README.md
-
+```
 
 ---
 
@@ -59,16 +59,15 @@ foodtrack-db/
 
 ## Cómo ejecutar este proyecto
 
-### 1. Crear base de datos
-```sql
+1. Crear base de datos
 CREATE DATABASE FoodTrackDB;
 GO
 
-### 2. Crear tablas
+2. Crear tablas
 Ejecutar:
 scripts/01_create_tables.sql
 
-### 3. Insertar datos iniciales
+3. Insertar datos iniciales
 En este orden:
 scripts/02_insert_foodtrucks.sql
 scripts/03_insert_products.sql
