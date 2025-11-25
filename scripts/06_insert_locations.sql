@@ -1,0 +1,3 @@
+INSERT INTO locations (location_id, foodtruck_id, location_date, zone) VALUES
+(1, 1, '2023-09-01', 'Centro'),
+(2, 2, '2023-09-01', 'Parque');
