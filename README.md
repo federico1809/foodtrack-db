@@ -52,8 +52,38 @@ foodtrack-db/
 ## Diagrama ER
 
 ![Diagrama ER FoodTrack](FoodTrackDB_ER.png)
-
 > Exportado desde DBeaver.
+
+### Descripción del modelo ER
+
+El modelo entidad–relación de FoodTrackDB representa la gestión operativa de foodtrucks, pedidos y movimientos dentro de la ciudad. Está compuesto por cinco entidades principales y sus relaciones:
+-foodtrucks
+Contiene la información base de cada foodtruck (nombre, tipo de cocina, ciudad).
+Es la entidad central del modelo.
+-products
+Lista los productos ofrecidos por cada foodtruck, incluyendo precio y stock.
+Relación: un foodtruck puede tener muchos productos
+(1 → N con foodtrucks)
+-orders
+Registra cada pedido realizado, con fecha, estado y total asociado.
+Relación: un foodtruck puede generar muchos pedidos
+(1 → N con foodtrucks)
+-order_items
+Representa el detalle de los productos incluidos en cada pedido, con cantidad.
+Relaciones:
+    - un pedido incluye muchos ítems (1 → N con orders)
+    - un producto puede aparecer en muchos pedidos (1 → N con products)
+-locations
+Guarda la ubicación diaria de cada foodtruck (zona y fecha).
+Relación: un foodtruck puede tener múltiples ubicaciones registradas en el tiempo
+(1 → N con foodtrucks)
+
+#### Resumen del modelo
+foodtrucks es la entidad principal
+relaciones exclusivamente 1 a muchos
+no hay relaciones circulares ni many-to-many directas
+order_items funciona como tabla puente para detalle transaccional
+soporta trazabilidad histórica de ubicación mediante locations
 
 ---
 
