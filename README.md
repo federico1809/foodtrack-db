@@ -1,70 +1,86 @@
-# FoodTrack-DB
+# FoodTrack DB
 
-Esquema relacional y scripts SQL para gestionar operaciones de foodtrucks.
+## Descripción del proyecto
 
----
+**FoodTrack** es una plataforma para gestionar operaciones de foodtrucks en distintos puntos de la ciudad.  
+Este repositorio contiene la **base de datos SQL Server** y los scripts para:
 
-## Objetivo
+- Crear tablas (`foodtrucks`, `products`, `orders`, `order_items`, `locations`)  
+- Insertar datos iniciales desde CSV  
+- Automatizar la carga de datos mediante Python  
 
-El propósito del proyecto es simular un **entorno profesional de desarrollo** de base de datos, aplicando buenas prácticas de modelado relacional y versionado con GitHub.
-
----
-
-## Herramientas
-
-- **Microsoft SQL Server** (motor de base de datos).  
-- **DBeaver** (cliente).  
-- **GitHub** (control de versiones y repositorio).
+El objetivo es simular un entorno de desarrollo profesional con un motor robusto y versionado desde el inicio.
 
 ---
 
-## Contenido del repositorio
+## Modelo de datos (Descripción de tablas)
 
-- Scripts de creación del esquema relacional inicial.  
-- Modelos de entidades (ERD).  
-- Versionado de cambios en la base de datos.
+### **foodtrucks**
+| Columna       | Tipo           | Descripción                       |
+|---------------|---------------|----------------------------------|
+| foodtruck_id  | INT PK        | Identificador único del foodtruck |
+| name          | NVARCHAR(100) | Nombre del foodtruck             |
+| cuisine_type  | NVARCHAR(50)  | Tipo de cocina                   |
+| city          | NVARCHAR(100) | Ciudad en la que opera           |
+
+### **products**
+| Columna       | Tipo           | Descripción                       |
+|---------------|---------------|----------------------------------|
+| product_id    | INT PK        | Identificador único del producto |
+| foodtruck_id  | INT FK        | Referencia a foodtrucks          |
+| name          | NVARCHAR(100) | Nombre del producto              |
+| price         | DECIMAL(10,2) | Precio del producto              |
+| stock         | INT           | Stock disponible                 |
+
+### **orders**
+| Columna       | Tipo           | Descripción                       |
+|---------------|---------------|----------------------------------|
+| order_id      | INT PK        | Identificador único del pedido    |
+| foodtruck_id  | INT FK        | Referencia a foodtrucks          |
+| order_date    | DATETIME      | Fecha del pedido                  |
+| status        | NVARCHAR(50)  | Estado del pedido                 |
+| total         | DECIMAL(10,2) | Total del pedido                  |
+
+### **order_items**
+| Columna       | Tipo           | Descripción                       |
+|---------------|---------------|----------------------------------|
+| order_item_id | INT PK        | Identificador único del ítem      |
+| order_id      | INT FK        | Referencia a orders               |
+| product_id    | INT FK        | Referencia a products             |
+| quantity      | INT           | Cantidad del producto             |
+
+### **locations**
+| Columna       | Tipo           | Descripción                       |
+|---------------|---------------|----------------------------------|
+| location_id   | INT PK        | Identificador único de ubicación  |
+| foodtruck_id  | INT FK        | Referencia a foodtrucks          |
+| location_date | DATETIME      | Fecha de operación                |
+| zone          | NVARCHAR(100) | Zona donde se encuentra          |
 
 ---
 
-## Entidades y Assets
+## Diagrama ER
 
-- **Foodtrucks**  
-- **Productos**  
-- **Pedidos (Orders)**  
-- **Ubicaciones (Locations)**  
-- **Detalle de ítems pedidos (Order_Items)**
+![Diagrama ER FoodTrack](ER_FoodTrack.png)
+
+> Exportá este diagrama desde DBeaver o cualquier herramienta de modelado y guardalo en la raíz del repositorio como `ER_FoodTrack.png`.
 
 ---
 
-## Modelo Relacional de FoodTrack
+## Instrucciones para ejecutar los scripts
 
-| Tabla        | PK             | FK                                                        | Campos importantes |
-|-------------|----------------|-----------------------------------------------------------|------------------|
-| foodtrucks  | foodtruck_id   | —                                                         | name, cuisine_type, city |
-| products    | product_id     | foodtruck_id → foodtrucks(foodtruck_id)                  | name, price, stock |
-| orders      | order_id       | foodtruck_id → foodtrucks(foodtruck_id)                  | order_date, status, total, comentarios, descuentos |
-| order_items | order_item_id  | order_id → orders(order_id), product_id → products(product_id) | quantity |
-| locations   | location_id    | foodtruck_id → foodtrucks(foodtruck_id)                  | location_date, zone |
+1. Abrir SQL Server Management Studio (SSMS) o DBeaver y conectarse a `FoodTrackDB`.  
+2. Ejecutar los scripts de creación de tablas en la carpeta `/scripts/`.  
+3. Cargar los datos iniciales desde los CSV usando:
+   - **BULK INSERT** o  
+   - **Asistente de importación de SQL Server**
+4. (Opcional) Ejecutar `cargar_datos.py` para cargar datos automáticamente con Python y registrar errores en la tabla `failed_orders`.  
+5. Verificar la carga:
 
----
-
-## Notas importantes
-
-- `status` en `orders` puede ser **VARCHAR(20)** o un **CHECK constraint** simulando ENUM (ej. entregado, pendiente).  
-- `price` y `total` como **DECIMAL(10,2)**.  
-- `stock` y `quantity` como **INT**.  
-- Relaciones **uno a muchos**:  
-  - Un foodtruck puede tener muchos productos, pedidos y ubicaciones.  
-  - Un pedido puede tener muchos items (`order_items`).  
-- Se agregaron **columnas VARCHAR** en `orders` para **comentarios y descuentos**.  
-
----
-
-## Uso
-
-1. Clonar el repositorio:
-
-```bash
-git clone https://github.com/TU_USUARIO/foodtrack-db.git
-
-
+```sql
+SELECT * FROM foodtrucks;
+SELECT * FROM products;
+SELECT * FROM orders;
+SELECT * FROM order_items;
+SELECT * FROM locations;
+SELECT * FROM failed_orders;
