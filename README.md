@@ -20,9 +20,8 @@ Incluye:
 ## Estructura del repositorio
 
 foodtrack-db/
-│
-├─ scripts/
-│ ├─ 01_create_tables.sql
+  ├─ scripts/
+    ├─ 01_create_tables.sql
 │ ├─ 02_insert_foodtrucks.sql
 │ ├─ 03_insert_products.sql
 │ ├─ 04_insert_orders.sql
