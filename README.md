@@ -1,86 +1,102 @@
-# FoodTrack DB
+# FoodTrack Database Project
 
-## Descripción del proyecto
+![GitHub last commit](https://img.shields.io/github/last-commit/federico1809/foodtrack-db)
+![GitHub repo size](https://img.shields.io/github/repo-size/federico1809/foodtrack-db)
+![SQL Server](https://img.shields.io/badge/SQL%20Server-2019%2B-red)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![DBeaver](https://img.shields.io/badge/DBeaver-23.0%2B-orange)
 
-**FoodTrack** es una plataforma para gestionar operaciones de foodtrucks en distintos puntos de la ciudad.  
-Este repositorio contiene la **base de datos SQL Server** y los scripts para:
+FoodTrack es una base de datos diseñada para gestionar operaciones de **foodtrucks** en distintas ciudades.  
 
-- Crear tablas (`foodtrucks`, `products`, `orders`, `order_items`, `locations`)  
-- Insertar datos iniciales desde CSV  
-- Automatizar la carga de datos mediante Python  
-
-El objetivo es simular un entorno de desarrollo profesional con un motor robusto y versionado desde el inicio.
+Incluye:
+- modelado de datos
+- implementación en SQL Server
+- inserción de datos
+- automatización en Python
+- versionado con Git y GitHub
 
 ---
 
-## Modelo de datos (Descripción de tablas)
+## Estructura del repositorio
 
-### **foodtrucks**
-| Columna       | Tipo           | Descripción                       |
-|---------------|---------------|----------------------------------|
-| foodtruck_id  | INT PK        | Identificador único del foodtruck |
-| name          | NVARCHAR(100) | Nombre del foodtruck             |
-| cuisine_type  | NVARCHAR(50)  | Tipo de cocina                   |
-| city          | NVARCHAR(100) | Ciudad en la que opera           |
-
-### **products**
-| Columna       | Tipo           | Descripción                       |
-|---------------|---------------|----------------------------------|
-| product_id    | INT PK        | Identificador único del producto |
-| foodtruck_id  | INT FK        | Referencia a foodtrucks          |
-| name          | NVARCHAR(100) | Nombre del producto              |
-| price         | DECIMAL(10,2) | Precio del producto              |
-| stock         | INT           | Stock disponible                 |
-
-### **orders**
-| Columna       | Tipo           | Descripción                       |
-|---------------|---------------|----------------------------------|
-| order_id      | INT PK        | Identificador único del pedido    |
-| foodtruck_id  | INT FK        | Referencia a foodtrucks          |
-| order_date    | DATETIME      | Fecha del pedido                  |
-| status        | NVARCHAR(50)  | Estado del pedido                 |
-| total         | DECIMAL(10,2) | Total del pedido                  |
-
-### **order_items**
-| Columna       | Tipo           | Descripción                       |
-|---------------|---------------|----------------------------------|
-| order_item_id | INT PK        | Identificador único del ítem      |
-| order_id      | INT FK        | Referencia a orders               |
-| product_id    | INT FK        | Referencia a products             |
-| quantity      | INT           | Cantidad del producto             |
-
-### **locations**
-| Columna       | Tipo           | Descripción                       |
-|---------------|---------------|----------------------------------|
-| location_id   | INT PK        | Identificador único de ubicación  |
-| foodtruck_id  | INT FK        | Referencia a foodtrucks          |
-| location_date | DATETIME      | Fecha de operación                |
-| zone          | NVARCHAR(100) | Zona donde se encuentra          |
+foodtrack-db/
+│
+├─ scripts/
+│ ├─ 01_create_tables.sql
+│ ├─ 02_insert_foodtrucks.sql
+│ ├─ 03_insert_products.sql
+│ ├─ 04_insert_orders.sql
+│ ├─ 05_insert_order_items.sql
+│ ├─ 06_insert_locations.sql
+│ ├─ 07_Esquema_DDL_Foodtrack.sql
+│ ├─ 08_Script_DML_de_Insercion.sql
+│ ├─ 09_Consultas_DQL.sql
+│ ├─ 10_ALTER_Comments.sql
+│ └─ 11_ALTER_discount.sql
+│
+├─ data/
+│ ├─ 01-foodtrucks.csv
+│ ├─ 02-products.csv
+│ ├─ 03-orders.csv
+│ ├─ 04-order_items.csv
+│ └─ 05-locations.csv
+│
+├─ AUT_failed_orders.py
+├─ FoodTrackDB_ER.png
+└─ README.md
 
 ---
 
 ## Diagrama ER
 
-![Diagrama ER de FoodTrack](FoodTrackDB_ER.png)
+![Diagrama ER FoodTrack](FoodTrackDB_ER.png)
 
-> Exportá este diagrama desde DBeaver o cualquier herramienta de modelado y guardalo en la raíz del repositorio como `ER_FoodTrack.png`.
+> Exportado desde DBeaver.
 
 ---
 
-## Instrucciones para ejecutar los scripts
+## Cómo ejecutar este proyecto
 
-1. Abrir SQL Server Management Studio (SSMS) o DBeaver y conectarse a `FoodTrackDB`.  
-2. Ejecutar los scripts de creación de tablas en la carpeta `/scripts/`.  
-3. Cargar los datos iniciales desde los CSV usando:
-   - **BULK INSERT** o  
-   - **Asistente de importación de SQL Server**
-4. Ejecutar `AUT_failed_orders.py` para cargar datos automáticamente con Python y registrar errores en la tabla `failed_orders`.  
-5. Verificar la carga:
-
+### 1. Crear base de datos
 ```sql
-SELECT * FROM foodtrucks;
-SELECT * FROM products;
-SELECT * FROM orders;
-SELECT * FROM order_items;
-SELECT * FROM locations;
-SELECT * FROM failed_orders;
+CREATE DATABASE FoodTrackDB;
+GO
+
+### 2. Crear tablas
+Ejecutar:
+scripts/01_create_tables.sql
+
+### 3. Insertar datos iniciales
+En este orden:
+scripts/02_insert_foodtrucks.sql
+scripts/03_insert_products.sql
+scripts/04_insert_orders.sql
+scripts/05_insert_order_items.sql
+scripts/06_insert_locations.sql
+
+### 4. Scripts adicionales
+| Script                         | Descripción             |
+| ------------------------------ | ----------------------- |
+| 07_Esquema_DDL_Foodtrack.sql   | DDL completo            |
+| 08_Script_DML_de_Insercion.sql | Inserciones masivas     |
+| 09_Consultas_DQL.sql           | Consultas analíticas    |
+| 10_ALTER_Comments.sql          | Documentación           |
+| 11_ALTER_discount.sql          | Modificación de esquema |
+
+
+### 5. Automatización en Python
+Archivo incluido:
+AUT_failed_orders.py
+
+Funcionalidades:
+-conexión via pyodbc
+-carga programática de datos
+-logging de errores en failed_orders
+
+## Roadmap
+v1.0 — COMPLETADO
+✔ Modelo relacional
+✔ Carga inicial de datos
+✔ Scripts organizados
+✔ Documentación base
+✔ Automatización inicial
