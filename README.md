@@ -58,22 +58,41 @@ foodtrack-db/
 ---
 
 ## Cómo ejecutar este proyecto
-
+### Formato árbol
+```bash
+│
 1. Crear base de datos
-CREATE DATABASE FoodTrackDB;
-GO
-
+│   └─ CREATE DATABASE FoodTrackDB; GO
+│
 2. Crear tablas
-Ejecutar:
-scripts/01_create_tables.sql
-
+│   └─ scripts/01_create_tables.sql
+│
 3. Insertar datos iniciales
-En este orden:
-scripts/02_insert_foodtrucks.sql
-scripts/03_insert_products.sql
-scripts/04_insert_orders.sql
-scripts/05_insert_order_items.sql
-scripts/06_insert_locations.sql
+│   ├─ scripts/02_insert_foodtrucks.sql
+│   ├─ scripts/03_insert_products.sql
+│   ├─ scripts/04_insert_orders.sql
+│   ├─ scripts/05_insert_order_items.sql
+│   └─ scripts/06_insert_locations.sql
+│
+4. Verificar esquema y documentación
+│   └─ scripts/07_Esquema_DDL_Foodtrack.sql
+│
+5. Ejecutar script de automatización
+│   └─ AUT_failed_orders.py
+```
+
+### Formato tabla:
+| Paso | Acción                            | Archivo / Comando                      |
+| ---: | --------------------------------- | -------------------------------------- |
+|    1 | Crear base de datos               | `CREATE DATABASE FoodTrackDB; GO`      |
+|    2 | Crear tablas                      | `scripts/01_create_tables.sql`         |
+|    3 | Insertar foodtrucks               | `scripts/02_insert_foodtrucks.sql`     |
+|    4 | Insertar productos                | `scripts/03_insert_products.sql`       |
+|    5 | Insertar órdenes                  | `scripts/04_insert_orders.sql`         |
+|    6 | Insertar items de órdenes         | `scripts/05_insert_order_items.sql`    |
+|    7 | Insertar ubicaciones              | `scripts/06_insert_locations.sql`      |
+|    8 | Validar estructura completa       | `scripts/07_Esquema_DDL_Foodtrack.sql` |
+|    9 | Automatización opcional en Python | `AUT_failed_orders.py`                 |
 
 ---
 
