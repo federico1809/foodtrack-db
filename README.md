@@ -19,30 +19,33 @@ Incluye:
 
 ## Estructura del repositorio
 
+```bash
 foodtrack-db/
-  ├─ scripts/
-    ├─ 01_create_tables.sql
-│ ├─ 02_insert_foodtrucks.sql
-│ ├─ 03_insert_products.sql
-│ ├─ 04_insert_orders.sql
-│ ├─ 05_insert_order_items.sql
-│ ├─ 06_insert_locations.sql
-│ ├─ 07_Esquema_DDL_Foodtrack.sql
-│ ├─ 08_Script_DML_de_Insercion.sql
-│ ├─ 09_Consultas_DQL.sql
-│ ├─ 10_ALTER_Comments.sql
-│ └─ 11_ALTER_discount.sql
+│
+├─ scripts/
+│   ├─ 01_create_tables.sql
+│   ├─ 02_insert_foodtrucks.sql
+│   ├─ 03_insert_products.sql
+│   ├─ 04_insert_orders.sql
+│   ├─ 05_insert_order_items.sql
+│   ├─ 06_insert_locations.sql
+│   ├─ 07_Esquema_DDL_Foodtrack.sql
+│   ├─ 08_Script_DML_de_Insercion.sql
+│   ├─ 09_Consultas_DQL.sql
+│   ├─ 10_ALTER_Comments.sql
+│   └─ 11_ALTER_discount.sql
 │
 ├─ data/
-│ ├─ 01-foodtrucks.csv
-│ ├─ 02-products.csv
-│ ├─ 03-orders.csv
-│ ├─ 04-order_items.csv
-│ └─ 05-locations.csv
+│   ├─ 01-foodtrucks.csv
+│   ├─ 02-products.csv
+│   ├─ 03-orders.csv
+│   ├─ 04-order_items.csv
+│   └─ 05-locations.csv
 │
 ├─ AUT_failed_orders.py
 ├─ FoodTrackDB_ER.png
 └─ README.md
+
 
 ---
 
@@ -73,7 +76,9 @@ scripts/04_insert_orders.sql
 scripts/05_insert_order_items.sql
 scripts/06_insert_locations.sql
 
-### 4. Scripts adicionales
+---
+
+## Scripts adicionales
 | Script                         | Descripción             |
 | ------------------------------ | ----------------------- |
 | 07_Esquema_DDL_Foodtrack.sql   | DDL completo            |
@@ -82,8 +87,9 @@ scripts/06_insert_locations.sql
 | 10_ALTER_Comments.sql          | Documentación           |
 | 11_ALTER_discount.sql          | Modificación de esquema |
 
+---
 
-### 5. Automatización en Python
+## Automatización en Python
 Archivo incluido:
 AUT_failed_orders.py
 
@@ -91,6 +97,8 @@ Funcionalidades:
 -conexión via pyodbc
 -carga programática de datos
 -logging de errores en failed_orders
+
+---
 
 ## Roadmap
 v1.0 — COMPLETADO
